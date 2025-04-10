@@ -1,0 +1,1 @@
+# fastboosty-deployment
