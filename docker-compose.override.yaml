@@ -1,0 +1,35 @@
+services:
+  auth_service:
+    build:
+      context: ../fastboosty-auth_service
+      dockerfile: Dockerfile
+    volumes:
+      - ../fastboosty-auth_service:/app
+
+  profile_service:
+    build:
+      context: ../fastboosty-profile_service
+      dockerfile: Dockerfile
+    volumes:
+      - ../fastboosty-profile_service:/app
+
+  content_service:
+    build:
+      context: ../fastboosty-content_service
+      dockerfile: Dockerfile
+    volumes:
+      - ../fastboosty-content_service:/app
+
+  subscription_service:
+    build:
+      context: ../fastboosty-subscription_service
+      dockerfile: Dockerfile
+    volumes:
+      - ../fastboosty-subscription_service:/app
+
+  payment_service:
+    build:
+      context: ../fastboosty-payment_service
+      dockerfile: Dockerfile
+    volumes:
+      - ../fastboosty-payment_service:/app
