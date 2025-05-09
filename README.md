@@ -12,7 +12,7 @@ The FastBoosty application is built using a microservices architecture. This dep
     *   [`content_service`](https://github.com/fotapol/fastboosty-content_service): Manages user-generated content (posts).
     *   [`subscription_service`](https://github.com/fotapol/fastboosty-subscription_service): Manages subscription tiers and user subscriptions.
     *   [`payment_service`](https://github.com/fotapol/fastboosty-payment_service): Handles payment processing (integrates with Stripe).
-*   **Frontend:**
+*   **Frontend (React):**
     *   [`frontend prototype`](https://github.com/fotapol/fastboosty-frontend): A React application providing the user interface (served via Nginx).
 *   **Infrastructure:**
     *   `nginx`: Acts as a reverse proxy and API gateway.
@@ -57,12 +57,12 @@ The FastBoosty application is built using a microservices architecture. This dep
 
 You have two main options to run the application:
 
-**Option 1: Using Pre-built Images (Recommended for standard deployment)**
+**Option 1: Using Pre-built Images**
 
-This uses the images specified in `docker-compose.yaml` (pulled from ghcr.io).
+This uses the pre-build images specified in `docker-compose.yaml` (pulled from ghcr.io).
 
 ```bash
-docker-compose up -d
+docker-compose -f docker-compose.yaml up -d
 ```
 
 **Option 2: Building Services Locally (for development)**
@@ -85,15 +85,18 @@ Once the containers are up and running:
     *   Subscription Service: `http://localhost:8080/api/subscription/...`
     *   Payment Service: `http://localhost:8080/api/payment/...`
 
-
 ## Stopping the Application
 
 To stop and remove the containers, networks, and volumes created by docker-compose:
 
 ```bash
 # If you used Option 1:
-docker-compose down
+docker-compose -f docker-compose.yaml down
 
 # If you used Option 2:
 docker-compose -f docker-compose.yaml -f docker-compose.override.yaml down
 ```
+
+## License
+
+This repository is licensed under the terms of the MIT license.
