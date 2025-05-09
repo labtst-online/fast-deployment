@@ -18,7 +18,7 @@ services:
       retries: 5
 
   auth_service:
-    image: ghcr.io/fotapol/fastboosty-auth_service:latest
+    image: ghcr.io/labtst-online/fast-auth_service:latest
     env_file:
     - ./.envs/auth.env
     ports:
@@ -30,7 +30,7 @@ services:
       - network
 
   profile_service:
-    image: ghcr.io/fotapol/fastboosty-profile_service:latest
+    image: ghcr.io/labtst-online/fast-profile_service:latest
     env_file:
       - .envs/profile.env
     ports:
@@ -46,7 +46,7 @@ services:
       - network
 
   content_service:
-    image: ghcr.io/fotapol/fastboosty-content_service:latest
+    image: ghcr.io/labtst-online/fast-content_service:latest
     env_file:
       - ./.envs/content.env
     ports:
@@ -60,7 +60,7 @@ services:
       - network
 
   subscription_service:
-    image: ghcr.io/fotapol/fastboosty-subscription_service:latest
+    image: ghcr.io/labtst-online/fast-subscription_service:latest
     env_file:
       - ./.envs/subscription.env
     ports:
@@ -78,7 +78,7 @@ services:
       - network
 
   payment_service:
-    image: ghcr.io/fotapol/fastboosty-payment_service:latest
+    image: ghcr.io/labtst-online/fast-payment_service:latest
     env_file:
       - ./.envs/payment.env
     ports:
@@ -148,7 +148,7 @@ services:
       retries: 5
 
   frontend:
-    image: fastboosty-frontend:latest
+    image: labtst-online/fast-frontend:latest
     ports:
     - "3000:80"
     networks:

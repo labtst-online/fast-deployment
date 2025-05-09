@@ -1,19 +1,19 @@
-# FastBoosty Deployment
+# Fast Deployment
 
-This repository contains the Docker Compose configuration to deploy and run the entire FastBoosty application stack, including all microservices, databases, caches, and the frontend.
+This repository contains the Docker Compose configuration to deploy and run the entire FastAPI application stack, including all microservices, databases, caches, and the frontend.
 
 ## Overview
 
-The FastBoosty application is built using a microservices architecture. This deployment setup uses Docker and Docker Compose to orchestrate the following services:
+The FastAPI application is built using a microservices architecture. This deployment setup uses Docker and Docker Compose to orchestrate the following services:
 
 *   **Backend Services (FastAPI):**
-    *   [`auth_service`](https://github.com/fotapol/fastboosty-auth_service): Handles user authentication and authorization.
-    *   [`profile_service`](https://github.com/fotapol/fastboosty-profile_service): Manages user profiles.
-    *   [`content_service`](https://github.com/fotapol/fastboosty-content_service): Manages user-generated content (posts).
-    *   [`subscription_service`](https://github.com/fotapol/fastboosty-subscription_service): Manages subscription tiers and user subscriptions.
-    *   [`payment_service`](https://github.com/fotapol/fastboosty-payment_service): Handles payment processing (integrates with Stripe).
+    *   [`auth_service`](https://github.com/labtst-online/fast-auth_service): Handles user authentication and authorization.
+    *   [`profile_service`](https://github.com/labtst-online/fast-profile_service): Manages user profiles.
+    *   [`content_service`](https://github.com/labtst-online/fast-content_service): Manages user-generated content (posts).
+    *   [`subscription_service`](https://github.com/labtst-online/fast-subscription_service): Manages subscription tiers and user subscriptions.
+    *   [`payment_service`](https://github.com/labtst-online/fast-payment_service): Handles payment processing (integrates with Stripe).
 *   **Frontend (React):**
-    *   [`frontend prototype`](https://github.com/fotapol/fastboosty-frontend): A React application providing the user interface (served via Nginx).
+    *   [`frontend prototype`](https://github.com/labtst-online/fast-frontend): A React application providing the user interface (served via Nginx).
 *   **Infrastructure:**
     *   `nginx`: Acts as a reverse proxy and API gateway.
     *   `db` (PostgreSQL): Primary relational database for the services.
@@ -31,25 +31,25 @@ The FastBoosty application is built using a microservices architecture. This dep
 1.  **Clone Repositories:**
     *   Clone this deployment repository:
         ```bash
-        git clone https://github.com/fotapol/fastboosty-deployment.git
-        cd fastboosty-deployment
+        git clone https://github.com/labtst-online/fast-deployment.git
+        cd fast-deployment
         ```
-    *   If you intend to build services locally (using the override file), clone all the individual service repositories (`fastboosty-auth_service`, `fastboosty-profile_service`, etc.) into the same parent directory as `fastboosty-deployment`. The `docker-compose.override.yaml` expects this structure:
+    *   If you intend to build services locally (using the override file), clone all the individual service repositories (`fast-auth_service`, `fast-profile_service`, etc.) into the same parent directory as `fast-deployment`. The `docker-compose.override.yaml` expects this structure:
         ```
         parent-directory/
-        ├── fastboosty-deployment/
-        ├── fastboosty-auth_service/
-        ├── fastboosty-profile_service/
-        ├── fastboosty-content_service/
-        ├── fastboosty-subscription_service/
-        ├── fastboosty-payment_service/
-        └── fastboosty-frontend/
+        ├── fast-deployment/
+        ├── fast-auth_service/
+        ├── fast-profile_service/
+        ├── fast-content_service/
+        ├── fast-subscription_service/
+        ├── fast-payment_service/
+        └── fast-frontend/
         ```
 
 2.  **Configuration:**
-    *   This deployment expects environment variables to be defined in files within a `.envs` directory inside `fastboosty-deployment`.
+    *   This deployment expects environment variables to be defined in files within a `.envs` directory inside `fast-deployment`.
     *   Create the `.envs` directory: `mkdir .envs`
-    *   For each service (`auth`, `profile`, `content`, `subscription`, `payment`), copy its corresponding `.env.sample` file from its respective service repository into the `.envs` directory and rename it (e.g., `cp ../fastboosty-auth_service/.env.sample .envs/auth.env`).
+    *   For each service (`auth`, `profile`, `content`, `subscription`, `payment`), copy its corresponding `.env.sample` file from its respective service repository into the `.envs` directory and rename it (e.g., `cp ../fast-auth_service/.env.sample .envs/auth.env`).
     *   Review and **modify the variables** within each `.env` file in the `.envs` directory according to your environment (database credentials, API keys like Stripe, JWT secrets, etc.).
     *   Ensure the `POSTGRES_USER` and `POSTGRES_PASSWORD` variables in your service `.env` files match the ones used by the `db` service (either default `postgres`/`postgres` or set via environment variables when running `docker-compose`).
 

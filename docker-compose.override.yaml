@@ -1,55 +1,55 @@
 services:
   auth_service:
     build:
-      context: ../fastboosty-auth_service
+      context: ../fast-auth_service
       dockerfile: Dockerfile
     volumes:
-      - ../fastboosty-auth_service:/app
+      - ../fast-auth_service:/app
 
   profile_service:
     build:
-      context: ../fastboosty-profile_service
+      context: ../fast-profile_service
       dockerfile: Dockerfile
       secrets:
         - github_token
     volumes:
-      - ../fastboosty-profile_service:/app
+      - ../fast-profile_service:/app
 
   content_service:
     build:
-      context: ../fastboosty-content_service
+      context: ../fast-content_service
       dockerfile: Dockerfile
       secrets:
         - github_token
     volumes:
-      - ../fastboosty-content_service:/app
+      - ../fast-content_service:/app
 
   subscription_service:
     build:
-      context: ../fastboosty-subscription_service
+      context: ../fast-subscription_service
       dockerfile: Dockerfile
       secrets:
         - github_token
     volumes:
-      - ../fastboosty-subscription_service:/app
+      - ../fast-subscription_service:/app
 
   payment_service:
     build:
-      context: ../fastboosty-payment_service
+      context: ../fast-payment_service
       dockerfile: Dockerfile
       secrets:
         - github_token
     volumes:
-      - ../fastboosty-payment_service:/app
+      - ../fast-payment_service:/app
 
   frontend:
     build:
-      context: ../fastboosty-frontend
+      context: ../fast-frontend
       dockerfile: Dockerfile
       args:
         VITE_API_BASE_URL: http://localhost:8080/api
     volumes:
-      - ../fastboosty-frontend:/app
+      - ../fast-frontend:/app
 
 secrets:
   github_token:
