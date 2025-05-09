@@ -18,9 +18,9 @@ services:
       retries: 5
 
   auth_service:
-    image: ghcr.io/fotapol/fastboosty-auth_service:0.1.0
+    image: ghcr.io/fotapol/fastboosty-auth_service:latest
     env_file:
-    - .envs/auth.env
+    - ./.envs/auth.env
     ports:
       - "8000:8000"
     depends_on:
@@ -30,7 +30,7 @@ services:
       - network
 
   profile_service:
-    image: ghcr.io/fotapol/fastboosty-profile_service:0.1.0
+    image: ghcr.io/fotapol/fastboosty-profile_service:latest
     env_file:
       - .envs/profile.env
     ports:
@@ -40,13 +40,15 @@ services:
         condition: service_healthy
       auth_service:
         condition: service_started
+      redis:
+        condition: service_healthy
     networks:
       - network
 
   content_service:
-    image: ghcr.io/fotapol/fastboosty-content_service:0.1.0
+    image: ghcr.io/fotapol/fastboosty-content_service:latest
     env_file:
-      - .envs/content.env
+      - ./.envs/content.env
     ports:
       - "8002:8002"
     depends_on:
@@ -58,9 +60,9 @@ services:
       - network
 
   subscription_service:
-    image: ghcr.io/fotapol/fastboosty-subscription_service:0.1.0
+    image: ghcr.io/fotapol/fastboosty-subscription_service:latest
     env_file:
-      - .envs/subscription.env
+      - ./.envs/subscription.env
     ports:
       - "8003:8003"
     depends_on:
@@ -76,9 +78,9 @@ services:
       - network
 
   payment_service:
-    image: ghcr.io/fotapol/fastboosty-payment_service:0.1.0
+    image: ghcr.io/fotapol/fastboosty-payment_service:latest
     env_file:
-      - .envs/payment.env
+      - ./.envs/payment.env
     ports:
       - "8004:8004"
     depends_on:
@@ -131,6 +133,27 @@ services:
     networks:
       - network
 
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    image: fastboosty-frontend:latest
+    ports:
+    - "3000:80"
+    networks:
+      - network
+
   nginx:
     image: nginx:latest
     volumes:
@@ -151,11 +174,11 @@ services:
     networks:
       - network
 
-
 volumes:
   postgres_data:
   zookeeper_data:
   zookeeper_log:
+  redis_data:
 
 networks:
   network:

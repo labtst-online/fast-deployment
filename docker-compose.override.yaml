@@ -10,6 +10,8 @@ services:
     build:
       context: ../fastboosty-profile_service
       dockerfile: Dockerfile
+      secrets:
+        - github_token
     volumes:
       - ../fastboosty-profile_service:/app
 
@@ -17,6 +19,8 @@ services:
     build:
       context: ../fastboosty-content_service
       dockerfile: Dockerfile
+      secrets:
+        - github_token
     volumes:
       - ../fastboosty-content_service:/app
 
@@ -24,6 +28,8 @@ services:
     build:
       context: ../fastboosty-subscription_service
       dockerfile: Dockerfile
+      secrets:
+        - github_token
     volumes:
       - ../fastboosty-subscription_service:/app
 
@@ -31,5 +37,20 @@ services:
     build:
       context: ../fastboosty-payment_service
       dockerfile: Dockerfile
+      secrets:
+        - github_token
     volumes:
       - ../fastboosty-payment_service:/app
+
+  frontend:
+    build:
+      context: ../fastboosty-frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:8080/api
+    volumes:
+      - ../fastboosty-frontend:/app
+
+secrets:
+  github_token:
+    environment: GITHUB_TOKEN
